@@ -9,3 +9,12 @@ module.exports = app => {
         if (err) throw err;
 
         var notes = JSON.parse(data);
+
+         // API ROUTES
+    
+        // Setup the /api/notes get route
+        app.get("/api/notes", function(req, res) {
+            // Read the db.json file and return all saved notes as JSON.
+            res.json(notes);
+        });
+
