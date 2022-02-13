@@ -14,7 +14,21 @@ module.exports = app => {
     
         // Setup the /api/notes get route
         app.get("/api/notes", function(req, res) {
-            // Read the db.json file and return all saved notes as JSON.
+            // Check the db.json and returns all saved notes as json.
             res.json(notes);
         });
+
+        app.post("/api/notes", function(req, res) {
+            // Receives a new note, adds it to db.json, then returns the new note
+            let newNote = req.body;
+            notes.push(newNote);
+            updateDb();
+            return console.log("Added new note: "+newNote.title);
+        });
+        // Retrieves a note with specific id
+        app.get("/api/notes/:id", function(req,res) {
+            // display json for the notes array indices of the provided id
+            res.json(notes[req.params.id]);
+        });
+
 
